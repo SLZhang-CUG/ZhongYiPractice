@@ -39,12 +39,19 @@ public class MainFrame extends JFrame {
 
   private JMenu createScoreMenu() {
     JMenu scoreMenu = new JMenu("成绩");
+    JMenuItem currentScoreMenu = new JMenuItem("本次练习成绩");
+    JMenuItem historyScoreMenu = new JMenuItem("历史练习成绩");
+    scoreMenu.add(currentScoreMenu);
+    scoreMenu.add(historyScoreMenu);
     return scoreMenu;
   }
 
   private JMenu createExamMenu() {
     JMenu examMenu = new JMenu("测试");
-
+    JMenuItem randomExamMenu = new JMenuItem("随机选题测试");
+    JMenuItem completeExamMenu = new JMenuItem("完整题目测试");
+    examMenu.add(randomExamMenu);
+    examMenu.add(completeExamMenu);
     return examMenu;
   }
 
