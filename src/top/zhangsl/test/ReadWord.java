@@ -20,24 +20,15 @@ public class ReadWord {
     String[] answerList = examQuestion[1].split("\n");
     ArrayList<Question> allQuestion = new ArrayList<Question>();
 
-    for(String answer:answerList){
-      String[] answers = answer.split(".");
-      for(String answer1 : answers){
-        System.out.print(answer1 + "," );
-      }
-      System.out.println();
-    }
-
-
     for(int i = 0 ; i < questionList.length; ){
       Question question = new Question();
-      String title = questionList[i];
+      String title = questionList[i].split("\\.")[1];
       ArrayList<String> options = new ArrayList<String>();
       options.add(questionList[i+1]);
       options.add(questionList[i+2]);
       options.add(questionList[i+3]);
       options.add(questionList[i+4]);
-      String answer = answerList[i/5+1];
+      String answer = answerList[i/5+1].split("\\.")[1];
 
       question.setTitle(title);
       question.setOptions(options);
@@ -46,10 +37,10 @@ public class ReadWord {
       allQuestion.add(question);
       i+=5;
     }
-
-//    for(Question oneQuestion: allQuestion){
-//      System.out.println(oneQuestion);
-//    }
+    int i = 0;
+    for(Question oneQuestion: allQuestion){
+      System.out.println(++i+"."+oneQuestion);
+    }
 
   }
 }
