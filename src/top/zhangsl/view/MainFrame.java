@@ -1,21 +1,37 @@
 package top.zhangsl.view;
 
 
+import top.zhangsl.control.ClientContext;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MainFrame extends JFrame {
 
-  public static void main(String[] args){
-    new MainFrame();
+
+
+  private ClientContext clientContext;
+
+  public void setClientContext(ClientContext clientContext) {
+    this.clientContext = clientContext;
+    this.clientContext.setMainFrame(this);
   }
+
   public MainFrame() {
 
     this.setJMenuBar(createMenuBar());
     this.setTitle("选择题练习系统");
     this.setSize(1024,720);
-    this.setVisible(true);
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    //this.setVisible(true);
+    //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    this.addWindowListener(new WindowAdapter() {
+      @Override
+      public void windowClosing(WindowEvent windowEvent) {
+        clientContext.exit();
+      }
+    });
     this.setContentPane(createContentPanel());
   }
 
