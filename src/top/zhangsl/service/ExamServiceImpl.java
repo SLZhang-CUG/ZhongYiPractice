@@ -19,7 +19,10 @@ public class ExamServiceImpl implements ExamService{
 
   @Override
   public ExamInfo start() {
-    return null;
+    getExamQuestions();
+    ExamInfo examInfo = new ExamInfo();
+    examInfo.setTotalNumbers(examQuestions.size());
+    return examInfo;
   }
 
   @Override
