@@ -19,26 +19,38 @@ public class ExamServiceImpl implements ExamService{
 
   @Override
   public ExamInfo start() {
-    return null;
-  }
-
-  @Override
-  public ExamInfo startRandom() {
-    getExamQuestions();
+    getExamQuestions(1);
     ExamInfo examInfo = new ExamInfo();
+    examInfo.setTitle("测试");
     examInfo.setTotalNumbers(examQuestions.size());
     return examInfo;
   }
 
   @Override
-  public ArrayList<QuestionInfo> getExamQuestions() {
+  public ExamInfo startRandom() {
+    getExamQuestions(2);
+    ExamInfo examInfo = new ExamInfo();
+    examInfo.setTitle("测试");
+    examInfo.setTotalNumbers(examQuestions.size());
+    return examInfo;
+  }
+
+  @Override
+  public ArrayList<QuestionInfo> getExamQuestions(int category) {
     int index = 0;
     Random random = new Random();
     // 一次考试的所有试题
     examQuestions = new ArrayList<QuestionInfo>();
-    ArrayList<Question> questions = entityContext.getAllQuestion();
-    for(int i = 0 ; i < 20; i++){
-      examQuestions.add(new QuestionInfo(questions.get(i)));
+    entityContext.setFilePath("ceshi.docx");
+    ArrayList<Question> questions =  entityContext.getAllQuestion();
+    if(category == 1) {
+      for (int i = 0; i < 20; i++) {
+        examQuestions.add(new QuestionInfo(questions.get(i)));
+      }
+    } else if (category == 2) {
+      for (int i = 0; i < 20; i++) {
+        examQuestions.add(new QuestionInfo(questions.get(i)));
+      }
     }
     return examQuestions;
   }

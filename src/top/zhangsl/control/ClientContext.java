@@ -1,11 +1,15 @@
 package top.zhangsl.control;
 
+import top.zhangsl.model.ExamInfo;
+import top.zhangsl.service.ExamService;
 import top.zhangsl.view.MainFrame;
 
 import javax.swing.*;
 
 public class ClientContext {
   private MainFrame mainFrame;
+  private ExamInfo examInfo;
+  private ExamService examService;
 
   public void setMainFrame(MainFrame mainFrame) {
     this.mainFrame = mainFrame;
@@ -17,4 +21,11 @@ public class ClientContext {
       System.exit(0);
     }
   }
+
+  public void randomStart(){
+    examInfo = examService.startRandom();
+
+  }
+
+
 }

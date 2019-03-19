@@ -3,10 +3,10 @@ package top.zhangsl.model;
 import java.util.ArrayList;
 
 public class Question {
-  private int id;
-  private String title;
-  private ArrayList<String> options;
-  private String answer;
+  private int id; //题号
+  private String title; //题干
+  private ArrayList<String> options; //选项
+  private String answer; //标准答案
 
   public Question() {
   }

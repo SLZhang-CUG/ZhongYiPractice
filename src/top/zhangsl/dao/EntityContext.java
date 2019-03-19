@@ -16,9 +16,14 @@ public class EntityContext {
   public EntityContext() {
   }
 
-  private void loadQuestion() throws IOException {
+  private void loadQuestion() {
 
-    XWPFDocument docx = new XWPFDocument(new FileInputStream(filePath));
+    XWPFDocument docx = null;
+    try {
+      docx = new XWPFDocument(new FileInputStream(filePath));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     XWPFWordExtractor we = new XWPFWordExtractor(docx);
     String[] examQuestion = we.getText().split("答案");
     String[] questionList = examQuestion[0].split("\n");
@@ -49,6 +54,7 @@ public class EntityContext {
   }
 
   public ArrayList<Question> getAllQuestion() {
+    loadQuestion();
     return allQuestion;
   }
 }

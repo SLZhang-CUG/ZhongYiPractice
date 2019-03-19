@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class QuestionInfo implements Serializable {
-  private Question question;
-  private ArrayList<String> userAnswer = new ArrayList<String>();
+  private Question question; //当前考试题目
+  private ArrayList<String> userAnswer = new ArrayList<String>(); //用户选择答案
 
   public QuestionInfo() {
   }
