@@ -19,7 +19,11 @@ public class ExamServiceImpl implements ExamService{
 
   @Override
   public ExamInfo start() {
-    return null;
+    getExamQuestions(1);
+    ExamInfo examInfo = new ExamInfo();
+    examInfo.setTitle("测试");
+    examInfo.setTotalNumbers(examQuestions.size());
+    return examInfo;
   }
 
   @Override
@@ -30,6 +34,7 @@ public class ExamServiceImpl implements ExamService{
     examInfo.setTotalNumbers(examQuestions.size());
     return examInfo;
   }
+
 
   @Override
   public ArrayList<QuestionInfo> getExamQuestions(int category) {
