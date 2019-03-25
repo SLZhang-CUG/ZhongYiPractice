@@ -6,6 +6,7 @@ import top.zhangsl.service.ExamService;
 import top.zhangsl.view.MainFrame;
 
 import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class ClientContext {
@@ -41,6 +42,16 @@ public class ClientContext {
     questionInfos = examService.getExamQuestions(1);
     mainFrame.updateView(examInfo,questionInfos);
   }
+
+  public void importFile(){
+    JFileChooser chooser = new JFileChooser();
+    chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+    chooser.showDialog(new JLabel(), "选择");
+    File file = chooser.getSelectedFile();
+    examService.setFilePath(file.getAbsoluteFile().toString());
+  }
+
+
 
 
 }

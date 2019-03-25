@@ -12,6 +12,7 @@ public class ExamServiceImpl implements ExamService{
 
   private EntityContext entityContext;
   private ArrayList<QuestionInfo> examQuestions;//考试的题目信息
+  private String filePath;
 
   public void setEntityContext(EntityContext entityContext) {
     this.entityContext = entityContext;
@@ -21,7 +22,8 @@ public class ExamServiceImpl implements ExamService{
   public ExamInfo start() {
     getExamQuestions(1);
     ExamInfo examInfo = new ExamInfo();
-    examInfo.setTitle("测试");
+    String filename = filePath.split("/")[filePath.split("/").length-1].split("\\.")[0];
+    examInfo.setTitle(filename);
     examInfo.setTotalNumbers(examQuestions.size());
     return examInfo;
   }
@@ -30,10 +32,13 @@ public class ExamServiceImpl implements ExamService{
   public ExamInfo startRandom() {
     getExamQuestions(2);
     ExamInfo examInfo = new ExamInfo();
-    examInfo.setTitle("测试");
+    String filename = filePath.split("/")[filePath.split("/").length-1].split("\\.")[0];
+    examInfo.setTitle(filename);
     examInfo.setTotalNumbers(examQuestions.size());
     return examInfo;
   }
+
+
 
 
   @Override
@@ -42,7 +47,7 @@ public class ExamServiceImpl implements ExamService{
     Random random = new Random();
     // 一次考试的所有试题
     examQuestions = new ArrayList<QuestionInfo>();
-    entityContext.setFilePath("ceshi.docx");
+    entityContext.setFilePath(filePath);
     ArrayList<Question> questions =  entityContext.getAllQuestion();
     if(category == 1) {
       for (int i = 0; i < 20; i++) {
@@ -60,5 +65,14 @@ public class ExamServiceImpl implements ExamService{
   @Override
   public void saveUserAnswers(ArrayList<String> userAnswers) {
 
+  }
+
+  public String getFilePath() {
+    return filePath;
+  }
+
+  @Override
+  public void setFilePath(String filePath) {
+    this.filePath = filePath;
   }
 }

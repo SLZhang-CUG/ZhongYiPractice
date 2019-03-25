@@ -95,6 +95,12 @@ public class MainFrame extends JFrame {
   private JMenu createFileMenu() {
     JMenu fileMenu = new JMenu("文件");
     JMenuItem importFileMenu = new JMenuItem("导入文件");
+    importFileMenu.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent actionEvent) {
+        clientContext.importFile();
+      }
+    });
     JMenuItem importQuestionBank = new JMenuItem("导入题库");
     JMenuItem exportQuestionBank = new JMenuItem("导出题库");
     JMenuItem exit = new JMenuItem("退出");
@@ -109,6 +115,7 @@ public class MainFrame extends JFrame {
   private JPanel createContentPanel() {
     jPanel = new JPanel(new BorderLayout());
     jPanel.add(BorderLayout.CENTER,createQuestionInfoPanel());
+
     return jPanel;
   }
 
@@ -161,7 +168,6 @@ public class MainFrame extends JFrame {
     for(QuestionInfo questionInfo:questionInfos) {
       jta.append(++i +"."+questionInfo.toString());
     }
-
     jPanel.add(BorderLayout.EAST,createButtonPanel());
   }
 

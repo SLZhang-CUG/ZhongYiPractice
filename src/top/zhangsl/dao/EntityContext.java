@@ -53,8 +53,14 @@ public class EntityContext {
     this.filePath = filePath;
   }
 
+  public String getFilePath() {
+    return filePath;
+  }
+
   public ArrayList<Question> getAllQuestion() {
     loadQuestion();
     return allQuestion;
   }
+
+
 }
