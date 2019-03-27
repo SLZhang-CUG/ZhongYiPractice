@@ -3,6 +3,7 @@ package top.zhangsl.control;
 import top.zhangsl.model.ExamInfo;
 import top.zhangsl.model.QuestionInfo;
 import top.zhangsl.service.ExamService;
+import top.zhangsl.view.AboutFrame;
 import top.zhangsl.view.MainFrame;
 
 import javax.swing.*;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 public class ClientContext {
   private MainFrame mainFrame;
+  private AboutFrame aboutFrame;
   private ExamInfo examInfo;
   private ExamService examService;
   private ArrayList<QuestionInfo> questionInfos;
@@ -23,6 +25,10 @@ public class ClientContext {
     this.mainFrame = mainFrame;
   }
 
+  public void setAboutFrame(AboutFrame aboutFrame) {
+    this.aboutFrame = aboutFrame;
+  }
+
   public void exit() {
     if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null,
             "确定要退出吗?")) {
@@ -30,6 +36,16 @@ public class ClientContext {
     }
   }
 
+  public void aboutExit() {
+    if (JOptionPane.YES_OPTION == JOptionPane.showConfirmDialog(null,
+            "确定要退出吗?")) {
+      aboutFrame.setVisible(false);
+    }
+  }
+
+  public void about(){
+    aboutFrame.setVisible(true);
+  }
   public void randomStart(){
     examInfo = examService.startRandom();
     questionInfos = examService.getExamQuestions(2);
@@ -49,6 +65,7 @@ public class ClientContext {
     chooser.showDialog(new JLabel(), "选择");
     File file = chooser.getSelectedFile();
     examService.setFilePath(file.getAbsoluteFile().toString());
+
   }
 
 

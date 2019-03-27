@@ -33,6 +33,8 @@ public class MainFrame extends JFrame {
     this.setJMenuBar(createMenuBar());
     this.setTitle("选择题练习系统");
     this.setSize(1024,720);
+    this.setLocationRelativeTo(null);
+    this.setResizable(false);
     //this.setVisible(true);
     //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     this.addWindowListener(new WindowAdapter() {
@@ -58,6 +60,12 @@ public class MainFrame extends JFrame {
   private JMenu createHelpMenu() {
     JMenu helpMenu = new JMenu("帮助");
     JMenuItem aboutMenu = new JMenuItem("关于");
+    aboutMenu.addActionListener(new ActionListener() {
+      @Override
+      public void actionPerformed(ActionEvent actionEvent) {
+        clientContext.about();
+      }
+    });
     helpMenu.add(aboutMenu);
     return helpMenu;
   }
