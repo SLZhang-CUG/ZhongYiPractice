@@ -65,6 +65,8 @@ public class ClientContext {
     chooser.showDialog(new JLabel(), "选择");
     File file = chooser.getSelectedFile();
     examService.setFilePath(file.getAbsoluteFile().toString());
+    File questionFile = new File("Question");
+    if(!questionFile.exists()) questionFile.mkdir();
 
   }
 
