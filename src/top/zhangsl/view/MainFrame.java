@@ -18,8 +18,12 @@ public class MainFrame extends JFrame {
 
 
   private ClientContext clientContext;
-  private JPanel jPanel;
+  //private JPanel jPanel;
+  private JPanel jButtonPanel;
   private JTextArea jta;
+  private JButton jOkButton;
+  private int height = 720;
+  private int weight = 1024;
 
   private int length;
 
@@ -32,7 +36,7 @@ public class MainFrame extends JFrame {
 
     this.setJMenuBar(createMenuBar());
     this.setTitle("选择题练习系统");
-    this.setSize(1024,720);
+    this.setSize(weight,height);
     this.setLocationRelativeTo(null);
     this.setResizable(false);
     //this.setVisible(true);
@@ -121,31 +125,19 @@ public class MainFrame extends JFrame {
   }
 
   private JPanel createContentPanel() {
-    jPanel = new JPanel(new BorderLayout());
+    JPanel jPanel = new JPanel(new BorderLayout());
+    jPanel.add(BorderLayout.EAST,createButtonPanel());
     jPanel.add(BorderLayout.CENTER,createQuestionInfoPanel());
-
+    jPanel.revalidate();
     return jPanel;
   }
 
   private JPanel createButtonPanel() {
-    JPanel panel = new JPanel();
-    panel.setLayout(new GridLayout(length,1));
-    for(int i = 0 ; i < length; i++){
-      JPanel tempPanel = new JPanel(new FlowLayout());
-      JLabel jLabel = new JLabel((i+1)+".");
-      Option box1 = new Option("A", "A");
-      Option box2 = new Option("B", "B");
-      Option box3 = new Option("C", "C");
-      Option box4 = new Option("D", "D");
-      tempPanel.add(jLabel);
-      tempPanel.add(box1);
-      tempPanel.add(box2);
-      tempPanel.add(box3);
-      tempPanel.add(box4);
-      panel.add(tempPanel);
-
-    }
-    return panel;
+    JPanel jbPanel = new JPanel();
+    jButtonPanel  = new JPanel();
+    jButtonPanel.setLayout(new GridLayout(length,1));
+    jbPanel.add(jButtonPanel);
+    return jbPanel;
   }
 
   private class Option extends JCheckBox{
@@ -160,23 +152,43 @@ public class MainFrame extends JFrame {
   }
 
   private JScrollPane createQuestionInfoPanel() {
-    JScrollPane panel = new JScrollPane();
+    JScrollPane jsPanel = new JScrollPane();
     jta = new JTextArea();
-    //jta.setText("A\n\nB\n\n");
     jta.setLineWrap(true);
     jta.setFocusable(false);
-    panel.getViewport().add(jta);
-    return panel;
+    jsPanel.getViewport().add(jta);
+    return jsPanel;
   }
 
   public void updateView(ExamInfo examInfo, ArrayList<QuestionInfo> questionInfos){
+    jButtonPanel.removeAll();
     jta.setText(examInfo.toString()+"\n");
     length = examInfo.getTotalNumbers();
     int i = 0;
     for(QuestionInfo questionInfo:questionInfos) {
       jta.append(++i +"."+questionInfo.toString());
     }
-    jPanel.add(BorderLayout.EAST,createButtonPanel());
+    height = length * 40;
+    this.setSize(weight,height);
+    addCheckBox();
+  }
+
+  private void addCheckBox(){
+    for(int i = 0 ; i < length; i++){
+      JPanel tempPanel = new JPanel(new FlowLayout());
+      JLabel jLabel = new JLabel((i+1)+".");
+      Option box1 = new Option("A", "A");
+      Option box2 = new Option("B", "B");
+      Option box3 = new Option("C", "C");
+      Option box4 = new Option("D", "D");
+      tempPanel.add(jLabel);
+      tempPanel.add(box1);
+      tempPanel.add(box2);
+      tempPanel.add(box3);
+      tempPanel.add(box4);
+      jButtonPanel.add(tempPanel);
+    }
+    jButtonPanel.updateUI();
   }
 
 
