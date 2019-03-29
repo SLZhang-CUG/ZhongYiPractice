@@ -4,6 +4,7 @@ import top.zhangsl.dao.EntityContext;
 import top.zhangsl.model.ExamInfo;
 import top.zhangsl.model.Question;
 import top.zhangsl.model.QuestionInfo;
+import top.zhangsl.util.GetFileName;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -32,8 +33,9 @@ public class ExamServiceImpl implements ExamService{
   public ExamInfo startRandom() {
     getExamQuestions(2);
     ExamInfo examInfo = new ExamInfo();
-    String filename = filePath.split("/")[filePath.split("/").length-1].split("\\.")[0];
-    examInfo.setTitle(filename);
+    String filename = GetFileName.parseFilePath(filePath);
+    //String filename = filePath.split("/")[filePath.split("/").length-1].split("\\.")[0];
+    examInfo.setTitle(filename.split("\\.")[0]);
     examInfo.setTotalNumbers(examQuestions.size());
     return examInfo;
   }

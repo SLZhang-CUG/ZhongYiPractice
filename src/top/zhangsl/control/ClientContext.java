@@ -3,11 +3,14 @@ package top.zhangsl.control;
 import top.zhangsl.model.ExamInfo;
 import top.zhangsl.model.QuestionInfo;
 import top.zhangsl.service.ExamService;
+import top.zhangsl.util.CopyFile;
+import top.zhangsl.util.GetFileName;
 import top.zhangsl.view.AboutFrame;
 import top.zhangsl.view.MainFrame;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class ClientContext {
@@ -59,7 +62,7 @@ public class ClientContext {
     mainFrame.updateView(examInfo,questionInfos);
   }
 
-  public void importFile(){
+  public void importFile()  {
     JFileChooser chooser = new JFileChooser();
     chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
     chooser.showDialog(new JLabel(), "选择");
@@ -67,6 +70,12 @@ public class ClientContext {
     examService.setFilePath(file.getAbsoluteFile().toString());
     File questionFile = new File("Question");
     if(!questionFile.exists()) questionFile.mkdir();
+
+    try {
+      CopyFile.copyFile(file.getAbsoluteFile().toString(),"Question/"+GetFileName.parseFilePath(file.getAbsoluteFile().toString()));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
   }
 
