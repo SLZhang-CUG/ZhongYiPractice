@@ -80,6 +80,16 @@ public class ClientContext {
   }
 
 
+  public ArrayList<String> getAllFile(){
+    ArrayList<String> fileList = new ArrayList<>();
+    File allFile = new File("Question");
 
+    File[] files = allFile.listFiles();
+    for(File file:files){
+      fileList.add(file.getName());
+      System.out.println(file.getName());
+    }
+    return fileList;
+  }
 
 }

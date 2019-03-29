@@ -90,6 +90,7 @@ public class MainFrame extends JFrame {
       @Override
       public void actionPerformed(ActionEvent actionEvent) {
         clientContext.randomStart();
+        //clientContext.getAllFile();
       }
     });
     JMenuItem completeExamMenu = new JMenuItem("完整题目测试");
